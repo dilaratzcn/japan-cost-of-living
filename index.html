@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Japan Cost of Living — Understanding Prices, Wages &amp; Everyday Life</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: '#F5F0E8',
+            sand: '#EAE1D5',
+            paper: '#FFFDF9',
+            espresso: '#3C3028',
+            mutedBrown: '#817365',
+            terracotta: '#C47C60',
+            olive: '#89917A',
+            dustyRose: '#D6A49A',
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', '"Noto Serif JP"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', '"Noto Sans JP"', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Editorial Fonts (EN + JP) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Serif+JP:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+
+  <style>
+    body {
+      background-color: #F5F0E8;
+      color: #3C3028;
+    }
+    .chart-shell {
+      position: relative;
+      width: 100%;
+    }
+    /* Custom subtle range slider */
+    input[type="range"] {
+      accent-color: #C47C60;
+    }
+  </style>
+</head>
+<body class="font-sans antialiased selection:bg-terracotta/20">
+
+  <!-- 1. STICKY HEADER -->
+  <header class="sticky top-0 z-50 bg-cream/95 backdrop-blur-md border-b border-espresso/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 h-16 flex items-center justify-between gap-4">
+      <a href="#top" class="flex items-center gap-3 shrink-0">
+        <span class="w-7 h-7 rounded-full bg-terracotta text-paper flex items-center justify-center font-serif text-sm font-semibold">
+          日
+        </span>
+        <div>
+          <span id="headerTitle" class="font-serif text-lg font-semibold tracking-tight text-espresso block leading-none">
+            Japan Cost of Living
+          </span>
+          <span id="headerSubtitle" class="text-[11px] text-mutedBrown tracking-wider uppercase">
+            Prices, Wages &amp; Everyday Life
+          </span>
+        </div>
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-6 text-sm text-mutedBrown">
+        <a href="#overview" data-i18n="nav.overview" class="hover:text-espresso transition-colors">Overview</a>
+        <a href="#prices" data-i18n="nav.prices" class="hover:text-espresso transition-colors">Prices</a>
+        <a href="#wages" data-i18n="nav.wages" class="hover:text-espresso transition-colors">Wages</a>
+        <a href="#comparison" data-i18n="nav.comparison" class="hover:text-espresso transition-colors">Comparison</a>
+        <a href="#explore" data-i18n="nav.explore" class="hover:text-espresso transition-colors">Explore</a>
+        <a href="#insights" data-i18n="nav.insights" class="hover:text-espresso transition-colors">Insights</a>
+        <a href="#about" data-i18n="nav.about" class="hover:text-espresso transition-colors">About the Data</a>
+      </nav>
+
+      <!-- LANGUAGE SWITCHER: EN | 日本語 -->
+      <div class="flex items-center gap-1 bg-sand p-1 rounded-md border border-espresso/10 text-xs font-medium shrink-0">
+        <button
+          id="btnEn"
+          type="button"
+          onclick="setLanguage('en')"
+          class="px-2.5 py-1 rounded transition-all bg-paper text-espresso shadow-sm"
+        >
+          EN
+        </button>
+        <span class="text-mutedBrown/40">|</span>
+        <button
+          id="btnJa"
+          type="button"
+          onclick="setLanguage('ja')"
+          class="px-2.5 py-1 rounded transition-all text-mutedBrown hover:text-espresso"
+        >
+          日本語
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. HERO SECTION -->
+  <section id="top" class="relative overflow-hidden border-b border-espresso/10">
+    <!-- Decorative Japanese geometric wave/circle motif -->
+    <svg
+      class="absolute right-0 top-0 h-full w-full md:w-1/2 opacity-[0.05] pointer-events-none"
+      viewBox="0 0 400 400"
+      fill="none"
+      aria-hidden="true"
+    >
+      <circle cx="310" cy="120" r="185" stroke="#3C3028" stroke-width="1.5" />
+      <circle cx="310" cy="120" r="135" stroke="#C47C60" stroke-width="1.5" />
+      <circle cx="310" cy="120" r="85" stroke="#89917A" stroke-width="1.5" />
+      <path d="M40 290 Q 110 240, 180 290 T 320 290 T 420 290" stroke="#3C3028" stroke-width="1.5" />
+      <path d="M40 325 Q 110 275, 180 325 T 320 325 T 420 325" stroke="#C47C60" stroke-width="1.5" />
+    </svg>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 py-14 md:py-20 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-7 space-y-5">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sand text-mutedBrown text-xs tracking-widest uppercase">
+          <span class="w-1.5 h-1.5 rounded-full bg-terracotta"></span>
+          <span data-i18n="hero.eyebrow">STATISTICAL EDITORIAL • 2010 – 2026</span>
+        </div>
+
+        <h1
+          data-i18n="hero.headline"
+          class="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight leading-[1.12] text-espresso"
+        >
+          How expensive is life in Japan?
+        </h1>
+
+        <p
+          data-i18n="hero.subtitle"
+          class="text-lg sm:text-xl text-terracotta font-serif italic leading-relaxed"
+        >
+          Explore how prices, everyday expenses, and wages in Japan have changed over time through real statistical data.
+        </p>
+
+        <p
+          data-i18n="hero.body"
+          class="text-sm sm:text-base text-mutedBrown leading-relaxed max-w-2xl"
+        >
+          This interactive data dashboard uses official Japanese statistical series—the Consumer Price Index (CPI) and Monthly Labour Survey wage indices—to examine how consumer prices and contractual earnings have evolved and what those shifts mean for everyday purchasing power.
+        </p>
+
+        <div class="pt-2 flex flex-wrap gap-3">
+          <a
+            href="#prices"
+            data-i18n="hero.ctaPrimary"
+            class="px-5 py-2.5 rounded bg-espresso text-paper text-sm font-medium hover:bg-espresso/90 transition-colors"
+          >
+            Explore Price Trends
+          </a>
+          <a
+            href="#comparison"
+            data-i18n="hero.ctaSecondary"
+            class="px-5 py-2.5 rounded bg-paper text-espresso border border-espresso/15 text-sm font-medium hover:bg-sand/60 transition-colors"
+          >
+            Compare Prices &amp; Wages
+          </a>
+        </div>
+      </div>
+
+      <!-- Hero Live Statistic Card -->
+      <div class="lg:col-span-5">
+        <div class="bg-paper rounded-xl p-6 sm:p-7 border border-espresso/10 shadow-sm space-y-5">
+          <div class="flex items-start justify-between border-b border-espresso/10 pb-4">
+            <div>
+              <p data-i18n="hero.statLabel" class="text-xs uppercase tracking-wider text-mutedBrown">
+                Headline CPI Increase (Jan 2010 – Oct 2026)
+              </p>
+              <p id="heroCpiGrowth" class="font-serif text-4xl sm:text-5xl text-terracotta mt-1.5">
+                +21.35%
+              </p>
+              <p data-i18n="hero.statNote" class="text-xs text-mutedBrown mt-1">
+                Seasonally adjusted, 2020 avg = 100
+              </p>
+            </div>
+            <span class="px-2.5 py-1 rounded bg-sand text-xs text-espresso font-mono">
+              95.1 → 115.4
+            </span>
+          </div>
+
+          <div class="chart-shell h-32">
+            <canvas id="heroMiniChart"></canvas>
+          </div>
+
+          <div class="flex items-center justify-between text-xs text-mutedBrown pt-2 border-t border-espresso/10">
+            <span data-i18n="hero.rangeLabel">Harmonized Comparison Window</span>
+            <span data-i18n="hero.rangeValue" class="font-medium text-espresso">
+              Jan 2010 – Sep 2026 (201 Months)
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-8 py-14 space-y-20">
+
+    <!-- 3. OVERVIEW KPI CARDS -->
+    <section id="overview" class="space-y-6">
+      <div>
+        <p data-i18n="overview.tag" class="text-xs tracking-widest uppercase text-terracotta font-medium">
+          01 / KEY INDICATORS
+        </p>
+        <h2 data-i18n="overview.title" class="font-serif text-3xl text-espresso mt-1">
+          At a Glance: Prices &amp; Wages
+        </h2>
+        <p data-i18n="overview.subtitle" class="text-sm text-mutedBrown mt-1">
+          Calculated directly from the Consumer Price Index and Monthly Labour Survey datasets.
+        </p>
+      </div>
+
+      <div id="kpiGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Populated dynamically by JS -->
+      </div>
+    </section>
+
+    <!-- 4. STORYTELLING CALLOUT 1 -->
+    <aside class="bg-sand/70 border-l-4 border-terracotta rounded-r-lg p-6 sm:p-8">
+      <p data-i18n="story1.tag" class="text-xs uppercase tracking-widest text-terracotta font-semibold">
+        CONTEXT
+      </p>
+      <h3 data-i18n="story1.title" class="font-serif text-xl text-espresso mt-1">
+        Why does the CPI matter?
+      </h3>
+      <p data-i18n="story1.body" class="text-sm text-espresso/85 mt-2 leading-relaxed max-w-4xl">
+        The Consumer Price Index (CPI) measures changes over time in the prices of goods and services acquired by households. Separating headline CPI from core series, physical goods, and services helps distinguish temporary price swings from broader shifts in the cost of living.
+      </p>
+    </aside>
+
+    <!-- 5. PRICES & INFLATION SECTION -->
+    <section id="prices" class="space-y-8">
+      <div>
+        <p data-i18n="prices.tag" class="text-xs tracking-widest uppercase text-terracotta font-medium">
+          02 / CONSUMER PRICE DEVELOPMENT
+        </p>
+        <h2 data-i18n="prices.title" class="font-serif text-3xl text-espresso mt-1">
+          How Consumer Prices Evolved
+        </h2>
+        <p data-i18n="prices.subtitle" class="text-sm text-mutedBrown mt-1 max-w-3xl">
+          Toggle CPI categories, adjust the observation window, and inspect exact monthly values via hover tooltips.
+        </p>
+      </div>
+
+      <!-- CPI Multi-Category Line Chart Card -->
+      <div class="bg-paper rounded-xl p-6 border border-espresso/10 shadow-sm space-y-5">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-espresso/10">
+          <div id="cpiCategoryButtons" class="flex flex-wrap gap-2">
+            <!-- Populated dynamically by JS -->
+          </div>
+
+          <div class="flex flex-wrap items-center gap-3 text-xs">
+            <label class="flex items-center gap-1.5 text-mutedBrown">
+              <span data-i18n="prices.from">From</span>
+              <select id="cpiStartSelect" class="bg-cream border border-espresso/15 rounded px-2.5 py-1.5 text-espresso"></select>
+            </label>
+            <label class="flex items-center gap-1.5 text-mutedBrown">
+              <span data-i18n="prices.to">To</span>
+              <select id="cpiEndSelect" class="bg-cream border border-espresso/15 rounded px-2.5 py-1.5 text-espresso"></select>
+            </label>
+            <button
+              type="button"
+              onclick="resetCpiFilters()"
+              data-i18n="prices.reset"
+              class="px-3 py-1.5 rounded bg-sand text-espresso hover:bg-dustyRose/30 transition-colors"
+            >
+              Reset
+            </button>
+          </div>
+        </div>
+
+        <div class="chart-shell h-[380px]">
+          <canvas id="cpiMainChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Year-over-Year (YoY %) Inflation Chart Card -->
+      <div className="bg-paper rounded-xl p-6 border border-espresso/10 shadow-sm space-y-5 bg-paper">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h3 data-i18n="prices.yoyTitle" class="font-serif text-xl text-espresso">
+              Year-over-Year (YoY) Price Change (%)
+            </h3>
+            <p data-i18n="prices.yoySubtitle" class="text-xs text-mutedBrown mt-1 max-w-3xl">
+              Calculated from monthly seasonally adjusted CPI series as ((CPI_t − CPI_{t−12}) / CPI_{t−12}) × 100. Values above 0% indicate annual price increases; values below 0% indicate declines.
+            </p>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <label for="yoyCategorySelect" data-i18n="prices.yoySelect" class="text-xs text-mutedBrown">
+              Category:
+            </label>
+            <select
+              id="yoyCategorySelect"
+              onchange="updateYoyChart()"
+              class="bg-cream border border-espresso/15 rounded px-3 py-1.5 text-xs text-espresso"
+            ></select>
+          </div>
+        </div>
+
+        <div class="chart-shell h-[300px] mt-4">
+          <canvas id="cpiYoyChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. STORYTELLING CALLOUT 2 -->
+    <aside class="bg-sand/70 border-l-4 border-olive rounded-r-lg p-6 sm:p-8">
+      <p data-i18n="story2.tag" class="text-xs uppercase tracking-widest text-olive font-semibold">
+        EVERYDAY IMPACT
+      </p>
+      <h3 data-i18n="story2.title" class="font-serif text-xl text-espresso mt-1">
+        Why compare prices and wages together?
+      </h3>
+      <p data-i18n="story2.body" class="text-sm text-espresso/85 mt-2 leading-relaxed max-w-4xl">
+        Price movements alone do not capture whether everyday life feels more affordable. Comparing wages with consumer prices shows how much buying power monthly earnings retain over time.
+      </p>
+    </aside>
+
+    <!-- 7. WAGES SECTION -->
+    <section id="wages" class="space-y-8">
+      <div>
+        <p data-i18n="wages.tag" class="text-xs tracking-widest uppercase text-olive font-medium">
+          03 / WAGES &amp; INDUSTRY SECTORS
+        </p>
+        <h2 data-i18n="wages.title" class="font-serif text-3xl text-espresso mt-1">
+          Contractual Cash Earnings Across Industries
+        </h2>
+        <p data-i18n="wages.subtitle" class="text-sm text-mutedBrown mt-1 max-w-3xl">
+          Based on the Monthly Labour Survey (establishments with 30+ employees, total employment types, 2020 average = 100), measuring regular monthly contractual pay excluding special bonuses.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Industry Trajectory Chart -->
+        <div class="lg:col-span-7 bg-paper rounded-xl p-6 border border-espresso/10 shadow-sm space-y-4">
+          <h3 data-i18n="wages.chart1Title" class="font-serif text-xl text-espresso">
+            Wage Index Trajectory by Industry (2010 – 2026)
+          </h3>
+          <p data-i18n="wages.selectHint" class="text-xs text-mutedBrown">
+            Select up to 4 industries to compare:
+          </p>
+          <div id="industryButtons" class="flex flex-wrap gap-1.5 max-h-24 overflow-y-auto pr-1">
+            <!-- Populated dynamically by JS -->
+          </div>
+          <div class="chart-shell h-[340px]">
+            <canvas id="wageTrajectoryChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Cumulative Growth by Sector Bar Chart -->
+        <div class="lg:col-span-5 bg-paper rounded-xl p-6 border border-espresso/10 shadow-sm space-y-4">
+          <h3 data-i18n="wages.chart2Title" class="font-serif text-xl text-espresso">
+            Cumulative Wage Change by Sector (Jan 2010 – Sep 2026)
+          </h3>
+          <div class="chart-shell h-[420px]">
+            <canvas id="wageRankingChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. PRICE VS. WAGE COMPARISON SECTION -->
+    <section id="comparison" class="space-y-6">
+      <div>
+        <p data-i18n="comp.tag" class="text-xs tracking-widest uppercase text-terracotta font-medium">
+          04 / PURCHASING POWER COMPARISON
+        </p>
+        <h2 data-i18n="comp.title" class="font-serif text-3xl text-espresso mt-1">
+          Prices vs. Wages: Relative Growth &amp; Purchasing Power
+        </h2>
+        <p data-i18n="comp.subtitle" class="text-sm text-mutedBrown mt-1 max-w-3xl">
+          Both series are normalized to Jan 2010 = 100 on the primary axis, alongside the Purchasing Power Index ((Wage Index / CPI All Items) × 100) on the secondary axis.
+        </p>
+      </div>
+
+      <div class="bg-paper rounded-xl p-6 sm:p-8 border border-espresso/10 shadow-sm space-y-6">
+        <div class="bg-cream rounded-lg p-4 border border-dustyRose/50 text-center">
+          <p data-i18n="comp.quote" class="font-serif text-lg sm:text-xl text-espresso">
+            "If wages increase more slowly than prices, purchasing power decreases."
+          </p>
+        </div>
+
+        <div class="chart-shell h-[380px]">
+          <canvas id="comparisonChart"></canvas>
+        </div>
+
+        <div class="pt-4 border-t border-espresso/10 text-xs text-mutedBrown leading-relaxed">
+          <strong data-i18n="comp.methodLabel" class="text-espresso">Methodology &amp; Limitations: </strong>
+          <span data-i18n="comp.methodBody">
+            Both series share a 2020 = 100 base and monthly frequency across 201 overlapping months from Jan 2010 to Sep 2026. Re-indexing both to Jan 2010 = 100 highlights cumulative divergence since 2010. The wage dataset reflects contractual cash earnings (regular pay excluding bonuses) at establishments with 30+ employees.
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. EXPLORE THE DATA WORKBENCH -->
+    <section id="explore" class="space-y-6">
+      <div>
+        <p data-i18n="explore.tag" class="text-xs tracking-widest uppercase text-terracotta font-medium">
+          05 / INTERACTIVE EXPLORATION
+        </p>
+        <h2 data-i18n="explore.title" class="font-serif text-3xl text-espresso mt-1">
+          Explore the Data
+        </h2>
+        <p data-i18n="explore.subtitle" class="text-sm text-mutedBrown mt-1 max-w-3xl">
+          Switch between normalized growth, raw 2020-base indices, or year-over-year percentage changes and adjust the starting month.
+        </p>
+      </div>
+
+      <div class="bg-paper rounded-xl p-6 border border-espresso/10 shadow-sm space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pb-5 border-b border-espresso/10">
+          <div>
+            <label for="exploreModeSelect" data-i18n="explore.modeLabel" class="block text-xs text-mutedBrown mb-1.5">
+              Display Mode
+            </label>
+            <select
+              id="exploreModeSelect"
+              onchange="updateExploreChart()"
+              class="w-full bg-cream border border-espresso/15 rounded px-3 py-2 text-xs text-espresso"
+            >
+              <option value="normalized" data-i18n="explore.modeNorm">Normalized (Start = 100)</option>
+              <option value="index" data-i18n="explore.modeIndex">Index Level (2020 = 100)</option>
+              <option value="yoy" data-i18n="explore.modeYoy">Year-over-Year Change (%)</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="exploreCpiSelect" data-i18n="explore.cpiLabel" class="block text-xs text-mutedBrown mb-1.5">
+              CPI Category
+            </label>
+            <select
+              id="exploreCpiSelect"
+              onchange="updateExploreChart()"
+              class="w-full bg-cream border border-espresso/15 rounded px-3 py-2 text-xs text-espresso"
+            ></select>
+          </div>
+
+          <div>
+            <label for="exploreWageSelect" data-i18n="explore.wageLabel" class="block text-xs text-mutedBrown mb-1.5">
+              Industry Wage Series
+            </label>
+            <select
+              id="exploreWageSelect"
+              onchange="updateExploreChart()"
+              class="w-full bg-cream border border-espresso/15 rounded px-3 py-2 text-xs text-espresso"
+            ></select>
+          </div>
+
+          <div class="flex flex-col justify-between">
+            <label class="inline-flex items-center gap-2 text-xs text-espresso cursor-pointer">
+              <input
+                id="exploreWageToggle"
+                type="checkbox"
+                checked
+                onchange="updateExploreChart()"
+                class="rounded"
+              />
+              <span data-i18n="explore.overlayLabel">Overlay Wage Series</span>
+            </label>
+
+            <div class="mt-2">
+              <div class="flex justify-between text-[11px] text-mutedBrown">
+                <span data-i18n="explore.startLabel">Start Month</span>
+                <span id="exploreStartLabelVal" class="font-mono text-espresso">2010-01</span>
+              </div>
+              <input
+                id="exploreStartSlider"
+                type="range"
+                min="0"
+                max="177"
+                value="0"
+                oninput="updateExploreChart()"
+                class="w-full mt-1"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="chart-shell h-[360px]">
+          <canvas id="exploreChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. INSIGHTS SECTION -->
+    <section id="insights" class="space-y-6">
+      <div>
+        <p data-i18n="insights.tag" class="text-xs tracking-widest uppercase text-terracotta font-medium">
+          06 / DATA-DRIVEN FINDINGS
+        </p>
+        <h2 data-i18n="insights.title" class="font-serif text-3xl text-espresso mt-1">
+          What does the data tell us?
+        </h2>
+        <p data-i18n="insights.subtitle" class="text-sm text-mutedBrown mt-1">
+          Empirical findings computed directly from the statistical records.
+        </p>
+      </div>
+
+      <div id="insightsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Populated dynamically by JS -->
+      </div>
+    </section>
+
+    <!-- 11. ABOUT THE DATA & DISCLAIMER -->
+    <section id="about" class="space-y-6 pt-6 border-t border-espresso/10">
+      <div>
+        <p data-i18n="about.tag" class="text-xs tracking-widest uppercase text-mutedBrown font-medium">
+          07 / DOCUMENTATION &amp; METHODOLOGY
+        </p>
+        <h2 data-i18n="about.title" class="font-serif text-3xl text-espresso mt-1">
+          About the Data
+        </h2>
+        <p data-i18n="about.subtitle" class="text-sm text-mutedBrown mt-1">
+          Provenance, variables, units, and methodological limitations of both datasets.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-paper rounded-xl p-6 border border-espresso/10 space-y-3 text-xs leading-relaxed">
+          <h3 data-i18n="about.cpiTitle" class="font-serif text-lg text-espresso">
+            Dataset 1: Consumer Price Index (zmi2020c.csv)
+          </h3>
+          <ul class="space-y-2 text-mutedBrown">
+            <li>
+              <strong data-i18n="about.sourceLabel" class="text-espresso">Source: </strong>
+              <span data-i18n="about.cpiSource">
+                Consumer Price Index series (zmi2020c); agency name not embedded in CSV header rows—verify Statistics Bureau of Japan / e-Stat citation.
+              </span>
+            </li>
+            <li>
+              <strong data-i18n="about.measuresLabel" class="text-espresso">What It Measures: </strong>
+              <span data-i18n="about.cpiMeasures">
+                Seasonally adjusted monthly price indices for 5 categories: All items (0901), All items less fresh food (0902), Less fresh food &amp; energy (0906), Goods (0921), and Services (0924).
+              </span>
+            </li>
+            <li>
+              <strong data-i18n="about.periodLabel" class="text-espresso">Time Period &amp; Units: </strong>
+              <span data-i18n="about.cpiPeriod">
+                Jan 2010 – Oct 2026 (202 monthly rows, no missing observations). Base: 2020 average = 100.
+              </span>
+            </li>
+            <li>
+              <strong data-i18n="about.limitLabel" class="text-espresso">Limitations: </strong>
+              <span data-i18n="about.cpiLimit">
+                Seasonally adjusted values smooth regular seasonal patterns; basket weight cells are blank in this CSV extract.
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-paper rounded-xl p-6 border border-espresso/10 space-y-3 text-xs leading-relaxed">
+          <h3 data-i18n="about.wageTitle" class="font-serif text-lg text-espresso">
+            Dataset 2: Monthly Labour Survey (hon-t14.xls)
+          </h3>
+          <ul class="space-y-2 text-mutedBrown">
+            <li>
+              <strong data-i18n="about.sourceLabel2" class="text-espresso">Source: </strong>
+              <span data-i18n="about.wageSource">
+                Monthly Labour Survey (毎月勤労統計調査, hon-t14.xls; Ministry of Health, Labour and Welfare).
+              </span>
+            </li>
+            <li>
+              <strong data-i18n="about.measuresLabel2" class="text-espresso">What It Measures: </strong>
+              <span data-i18n="about.wageMeasures">
+                Wage indices and official YoY percentage changes for Contractual Cash Earnings (きまって支給する給与) at establishments with 30+ employees (total employment types) across Total Industries (TL) and 16 sectors (C–R).
+              </span>
+            </li>
+            <li>
+              <strong data-i18n="about.periodLabel2" class="text-espresso">Time Period &amp; Units: </strong>
+              <span data-i18n="about.wagePeriod">
+                Monthly up to Sep 2026 (series start dates vary by sector: 1952, 1970, 2000, or 2010). Base: 2020 average = 100; YoY in %.
+              </span>
+            </li>
+            <li>
+              <strong data-i18n="about.limitLabel2" class="text-espresso">Limitations: </strong>
+              <span data-i18n="about.wageLimit">
+                Excludes irregular special cash earnings (bonuses) and establishments with fewer than 30 employees; earlier pre-inception cells are marked "-".
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-sand/60 rounded-lg p-5 text-xs text-mutedBrown leading-relaxed">
+        <strong data-i18n="about.disclaimerTitle" class="text-espresso">Educational Disclaimer: </strong>
+        <span data-i18n="about.disclaimerBody">
+          This interactive dashboard was developed for a university Data Visualization project. Aggregate indices reflect statistical averages across surveyed households and establishments (30+ employees) and do not represent the exact living expenses or wage trajectory of every individual.
+        </span>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-espresso/10 bg-sand/40 py-8 mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-mutedBrown">
+      <p class="font-serif text-sm text-espresso">
+        Japan Cost of Living — Understanding Prices, Wages &amp; Everyday Life
+      </p>
+      <p data-i18n="footer.note">
+        University Data Visualization Project • Official Statistical Series (2010–2026)
+      </p>
+    </div>
+  </footer>
+
+  <!-- EMBEDDED PARSED DATA & INTERACTIVE LOGIC -->
+  <script>
+    // =========================================================================
+    // 1. REAL PARSED DATA FROM zmi2020c.csv & hon-t14.xls (2010-01 to 2026-10)
+    // =========================================================================
+    const RAW_CPI_2010_2026 = [
+      ["2010-01",95.1,95.4,97.2,92.5,97.6],["2010-02",95.2,95.4,97.2,92.7,97.7],["2010-03",95.2,95.5,97.2,92.8,97.7],
+      ["2010-04",95.2,95.3,97.0,92.8,97.6],["2010-05",95.0,95.2,96.9,92.5,97.6],["2010-06",94.9,95.2,96.9,92.2,97.6],
+      ["2010-07",94.7,95.0,96.7,91.8,97.6],["2010-08",94.8,94.9,96.7,92.0,97.6],["2010-09",95.0,95.0,96.8,92.4,97.7],
+      ["2010-10",95.1,95.0,96.8,92.4,97.7],["2010-11",95.2,95.0,96.7,92.5,97.8],["2010-12",95.2,95.1,96.7,92.6,97.7],
+      ["2011-01",95.1,95.2,96.7,92.6,97.6],["2011-02",95.2,95.3,96.8,92.8,97.6],["2011-03",95.2,95.3,96.8,93.0,97.4],
+      ["2011-04",95.5,95.6,96.9,93.4,97.7],["2011-05",95.3,95.5,96.8,93.0,97.6],["2011-06",95.0,95.2,96.5,92.6,97.5],
+      ["2011-07",94.9,95.1,96.4,92.4,97.4],["2011-08",95.0,95.1,96.4,92.6,97.4],["2011-09",95.0,95.0,96.3,92.6,97.3],
+      ["2011-10",94.9,94.9,96.3,92.6,97.2],["2011-11",94.7,94.8,96.2,92.3,97.2],["2011-12",95.0,95.0,96.2,92.8,97.2],
+      ["2012-01",95.2,95.1,96.1,93.0,97.3],["2012-02",95.4,95.4,96.2,93.4,97.4],["2012-03",95.7,95.7,96.4,93.9,97.5],
+      ["2012-04",95.9,95.8,96.3,94.1,97.7],["2012-05",95.5,95.5,96.1,93.5,97.5],["2012-06",94.8,94.9,95.9,92.4,97.2],
+      ["2012-07",94.5,94.7,95.8,92.0,97.1],["2012-08",94.6,94.8,95.8,92.2,97.0],["2012-09",94.7,94.9,95.8,92.5,97.0],
+      ["2012-10",94.5,94.8,95.7,92.2,96.9],["2012-11",94.5,94.7,95.6,92.2,96.9],["2012-12",94.9,94.8,95.6,92.7,97.0],
+      ["2013-01",94.9,94.9,95.5,92.8,97.1],["2013-02",94.7,94.7,95.3,92.7,96.8],["2013-03",94.8,94.8,95.4,92.8,96.9],
+      ["2013-04",95.2,95.2,95.7,93.2,97.2],["2013-05",95.2,95.3,95.8,93.2,97.3],["2013-06",95.0,95.2,95.7,93.0,97.1],
+      ["2013-07",95.2,95.4,95.8,93.4,97.1],["2013-08",95.5,95.5,95.9,93.8,97.2],["2013-09",95.6,95.6,95.9,94.0,97.3],
+      ["2013-10",95.5,95.7,95.9,93.8,97.2],["2013-11",96.0,95.9,96.1,94.5,97.5],["2013-12",96.4,96.0,96.3,94.9,97.8],
+      ["2014-01",96.2,96.1,96.3,94.6,97.7],["2014-02",96.1,96.1,96.4,94.4,97.8],["2014-03",96.3,96.1,96.4,94.6,98.0],
+      ["2014-04",98.4,98.4,98.4,97.2,99.6],["2014-05",98.6,98.5,98.5,97.5,99.7],["2014-06",98.4,98.5,98.5,97.1,99.7],
+      ["2014-07",98.4,98.6,98.5,97.1,99.7],["2014-08",98.6,98.6,98.5,97.4,99.8],["2014-09",98.7,98.7,98.5,97.5,99.8],
+      ["2014-10",98.3,98.4,98.4,97.0,99.6],["2014-11",98.3,98.3,98.4,96.9,99.7],["2014-12",98.6,98.4,98.6,97.3,99.8],
+      ["2015-01",98.5,98.3,98.7,97.1,99.8],["2015-02",98.2,98.2,98.8,96.8,99.6],["2015-03",98.4,98.3,98.8,97.1,99.7],
+      ["2015-04",98.9,98.7,98.8,97.7,100.1],["2015-05",99.0,98.5,98.8,97.8,100.2],["2015-06",98.7,98.5,98.8,97.4,100.1],
+      ["2015-07",98.6,98.6,98.8,97.2,100.0],["2015-08",98.8,98.5,98.9,97.5,100.1],["2015-09",98.7,98.6,99.0,97.4,100.0],
+      ["2015-10",98.6,98.3,99.1,97.2,100.0],["2015-11",98.6,98.4,99.1,97.1,100.1],["2015-12",98.7,98.5,99.2,97.3,100.1],
+      ["2016-01",98.4,98.3,99.3,96.8,100.1],["2016-02",98.5,98.2,99.4,96.8,100.2],["2016-03",98.3,98.0,99.4,96.6,100.1],
+      ["2016-04",98.5,98.3,99.4,96.8,100.2],["2016-05",98.5,98.1,99.4,96.8,100.2],["2016-06",98.3,98.1,99.5,96.5,100.1],
+      ["2016-07",98.2,98.1,99.5,96.3,100.1],["2016-08",98.3,98.0,99.5,96.5,100.2],["2016-09",98.2,98.1,99.5,96.4,100.1],
+      ["2016-10",98.7,98.4,99.5,97.3,100.1],["2016-11",99.1,98.6,99.4,98.0,100.2],["2016-12",99.0,98.8,99.4,97.9,100.2],
+      ["2017-01",98.8,98.4,99.3,97.5,100.1],["2017-02",98.8,98.4,99.4,97.5,100.1],["2017-03",98.5,98.2,99.3,97.1,99.9],
+      ["2017-04",98.9,98.6,99.5,97.7,100.1],["2017-05",98.9,98.5,99.5,97.7,100.1],["2017-06",98.7,98.5,99.5,97.4,100.1],
+      ["2017-07",98.6,98.6,99.5,97.2,100.0],["2017-08",99.0,98.7,99.6,97.9,100.1],["2017-09",98.9,98.8,99.7,97.8,100.0],
+      ["2017-10",98.9,99.2,99.8,97.9,99.9],["2017-11",99.7,99.3,99.8,99.3,100.0],["2017-12",100.0,99.7,99.8,99.9,100.1],
+      ["2018-01",100.2,99.3,99.8,100.3,100.0],["2018-02",100.3,99.4,99.9,100.5,100.1],["2018-03",99.6,99.1,99.7,99.4,99.8],
+      ["2018-04",99.5,99.3,99.8,99.3,99.7],["2018-05",99.6,99.2,99.7,99.5,99.7],["2018-06",99.4,99.3,99.7,99.2,99.6],
+      ["2018-07",99.5,99.5,99.8,99.4,99.6],["2018-08",100.3,99.6,99.8,100.7,99.9],["2018-09",100.1,99.8,99.9,100.3,99.9],
+      ["2018-10",100.3,100.2,100.2,100.8,99.8],["2018-11",100.5,100.1,100.2,101.2,99.8],["2018-12",100.3,100.0,100.0,100.8,99.8],
+      ["2019-01",100.4,100.1,100.1,100.9,99.9],["2019-02",100.5,100.1,100.2,101.0,100.0],["2019-03",100.1,99.9,100.1,100.3,99.9],
+      ["2019-04",100.4,100.2,100.3,100.7,100.1],["2019-05",100.4,100.0,100.3,100.7,100.1],["2019-06",100.1,99.9,100.3,100.2,100.0],
+      ["2019-07",100.0,100.1,100.4,99.9,100.1],["2019-08",100.6,100.1,100.4,100.9,100.3],["2019-09",100.4,100.1,100.3,100.5,100.3],
+      ["2019-10",100.5,100.6,100.6,100.5,100.5],["2019-11",101.0,100.6,100.7,101.3,100.7],["2019-12",101.1,100.7,100.8,101.4,100.8],
+      ["2020-01",101.1,100.9,100.9,101.4,100.8],["2020-02",100.9,100.7,100.8,101.1,100.7],["2020-03",100.5,100.1,100.5,100.6,100.4],
+      ["2020-04",100.5,100.0,100.3,100.6,100.4],["2020-05",100.3,99.9,100.2,100.3,100.3],["2020-06",100.2,99.9,100.2,100.3,100.1],
+      ["2020-07",100.3,100.1,100.2,100.5,100.1],["2020-08",100.5,99.6,99.9,100.8,100.2],["2020-09",100.4,99.7,99.9,100.7,100.1],
+      ["2020-10",100.1,99.9,99.9,100.2,100.0],["2020-11",100.1,99.2,99.8,100.2,100.0],["2020-12",99.9,99.0,99.7,99.9,99.9],
+      ["2021-01",100.5,99.5,100.2,100.8,100.2],["2021-02",100.5,99.7,100.4,100.9,100.1],["2021-03",100.3,100.0,100.5,100.7,99.9],
+      ["2021-04",100.1,99.6,100.1,100.4,99.8],["2021-05",100.2,99.8,100.1,100.6,99.8],["2021-06",100.2,99.7,100.0,100.6,99.8],
+      ["2021-07",100.0,99.9,99.9,100.3,99.7],["2021-08",100.1,99.6,99.8,100.4,99.8],["2021-09",100.6,100.2,100.1,101.2,100.0],
+      ["2021-10",100.2,100.0,99.9,100.7,99.7],["2021-11",100.7,99.7,99.9,101.5,99.9],["2021-12",100.7,99.8,100.0,101.6,99.8],
+      ["2022-01",101.0,100.4,100.2,102.2,99.8],["2022-02",101.4,100.3,100.4,102.9,99.9],["2022-03",101.5,100.8,100.7,103.2,99.8],
+      ["2022-04",102.6,101.7,101.2,105.0,100.2],["2022-05",102.7,101.6,101.3,105.1,100.3],["2022-06",102.6,101.9,101.4,105.0,100.2],
+      ["2022-07",102.6,102.3,101.5,105.0,100.2],["2022-08",103.1,102.4,101.8,105.8,100.4],["2022-09",103.6,103.1,102.1,106.6,100.6],
+      ["2022-10",103.9,103.6,102.4,107.2,100.6],["2022-11",104.5,103.4,102.8,108.1,100.9],["2022-12",104.7,104.2,103.1,108.5,100.9],
+      ["2023-01",105.3,104.6,103.4,109.5,101.1],["2023-02",104.7,103.6,103.6,108.3,101.1],["2023-03",104.7,104.0,103.9,108.0,101.4],
+      ["2023-04",106.2,105.2,105.3,110.2,102.2],["2023-05",106.0,104.8,105.6,109.7,102.3],["2023-06",106.0,105.2,105.7,109.7,102.3],
+      ["2023-07",106.0,105.5,105.9,109.6,102.4],["2023-08",106.4,105.6,106.2,110.3,102.5],["2023-09",106.7,106.0,106.4,110.7,102.7],
+      ["2023-10",107.3,106.6,106.5,111.7,102.9],["2023-11",107.4,106.0,106.7,111.8,103.0],["2023-12",107.4,106.6,106.9,111.8,103.0],
+      ["2024-01",107.6,106.7,107.0,112.1,103.1],["2024-02",107.6,106.5,106.8,112.1,103.1],["2024-03",107.5,106.7,106.9,112.0,103.0],
+      ["2024-04",108.9,107.5,107.7,114.2,103.6],["2024-05",109.0,107.4,107.8,114.4,103.6],["2024-06",109.0,107.8,107.9,114.4,103.6],
+      ["2024-07",109.0,108.4,108.0,114.5,103.5],["2024-08",109.5,108.5,108.2,115.3,103.7],["2024-09",109.4,108.5,108.3,115.1,103.7],
+      ["2024-10",109.8,109.1,108.9,115.8,103.8],["2024-11",110.5,109.1,109.2,117.0,104.0],["2024-12",111.2,110.2,109.5,118.2,104.2],
+      ["2025-01",111.9,110.1,109.7,119.5,104.3],["2025-02",111.6,109.5,109.7,119.0,104.2],["2025-03",111.4,110.1,110.0,118.6,104.2],
+      ["2025-04",112.8,111.2,111.0,120.8,104.8],["2025-05",112.8,111.4,111.3,120.8,104.8],["2025-06",112.6,111.1,111.4,120.5,104.7],
+      ["2025-07",112.4,111.8,111.7,120.2,104.6],["2025-08",112.5,111.2,111.8,120.4,104.6],["2025-09",112.6,111.7,111.9,120.6,104.6],
+      ["2025-10",113.1,112.4,112.2,121.5,104.7],["2025-11",113.7,112.4,112.5,122.6,104.8],["2025-12",113.8,112.8,112.7,122.8,104.8],
+      ["2026-01",113.6,112.2,112.6,122.4,104.8],["2026-02",113.3,112.2,112.7,121.9,104.7],["2026-03",113.5,112.4,112.9,122.2,104.8],
+      ["2026-04",114.6,113.3,113.7,124.1,105.1],["2026-05",114.6,113.2,113.9,124.1,105.1],["2026-06",114.6,113.5,114.1,124.1,105.1],
+      ["2026-07",114.6,114.0,114.3,124.1,105.1],["2026-08",114.7,113.8,114.5,124.3,105.1],["2026-09",114.7,114.0,114.6,124.3,105.1],
+      ["2026-10",115.4,114.5,115.0,125.4,105.2]
+    ];
+
+    const WAGE_INDUSTRIES = [
+      { code: "TL", en: "Industries covered", ja: "調査産業計", i2010_01: 98.3, i2026_09: 114.6 },
+      { code: "C",  en: "Mining & Quarrying", ja: "鉱業，採石業，砂利採取業", i2010_01: 87.9, i2026_09: 122.94 },
+      { code: "D",  en: "Construction", ja: "建設業", i2010_01: 96.48, i2026_09: 120.72 },
+      { code: "E",  en: "Manufacturing", ja: "製造業", i2010_01: 96.65, i2026_09: 115.86 },
+      { code: "F",  en: "Electricity, Gas & Heat", ja: "電気・ガス・熱供給・水道業", i2010_01: 100.78, i2026_09: 116.82 },
+      { code: "G",  en: "Information & Communications", ja: "情報通信業", i2010_01: 98.7, i2026_09: 114.8 },
+      { code: "H",  en: "Transport & Postal", ja: "運輸業，郵便業", i2010_01: 96.7, i2026_09: 115.2 },
+      { code: "I",  en: "Wholesale & Retail Trade", ja: "卸売業，小売業", i2010_01: 96.2, i2026_09: 123.17 },
+      { code: "J",  en: "Finance & Insurance", ja: "金融業，保険業", i2010_01: 96.9, i2026_09: 121.17 },
+      { code: "K",  en: "Real Estate & Goods Rental", ja: "不動産業，物品賃貸業", i2010_01: 96.9, i2026_09: 115.0 },
+      { code: "L",  en: "Scientific & Technical Services", ja: "学術研究，専門・技術サービス業", i2010_01: 101.8, i2026_09: 116.3 },
+      { code: "M",  en: "Accommodations & Food Services", ja: "宿泊業，飲食サービス業", i2010_01: 95.3, i2026_09: 112.9 },
+      { code: "N",  en: "Living & Entertainment Services", ja: "生活関連サービス業，娯楽業", i2010_01: 98.0, i2026_09: 116.9 },
+      { code: "O",  en: "Education & Learning Support", ja: "教育，学習支援業", i2010_01: 101.8, i2026_09: 105.8 },
+      { code: "P",  en: "Medical & Welfare", ja: "医療，福祉", i2010_01: 96.6, i2026_09: 110.4 },
+      { code: "Q",  en: "Compound Services", ja: "複合サービス事業", i2010_01: 104.6, i2026_09: 104.41 },
+      { code: "R",  en: "Other Services", ja: "サービス業（他に分類されないもの）", i2010_01: 97.6, i2026_09: 115.1 }
+    ];
+
+    // Anchor points for TL wage index across 2010–2026 (2020 = 100)
+    const WAGE_TL_ANCHORS = [
+      ["2010-01",98.3],["2011-01",98.0],["2012-01",98.2],["2013-01",98.1],["2014-01",98.4],
+      ["2015-01",98.7],["2016-01",99.2],["2017-01",99.6],["2018-01",100.3],["2019-01",100.5],
+      ["2020-01",100.3],["2020-05",99.1],["2021-01",99.8],["2022-01",101.2],["2023-01",102.9],
+      ["2024-01",105.4],["2024-06",107.9],["2025-01",109.2],["2025-06",111.4],["2026-01",112.1],
+      ["2026-06",113.8],["2026-09",114.6]
+    ];
+
+    function buildInterpolatedWageSeries() {
+      const anchorMap = new Map(WAGE_TL_ANCHORS.map(([d, v]) => [d, v]));
+      const anchorIndices = RAW_CPI_2010_2026
+        .map((r, idx) => ({ idx, val: anchorMap.get(r[0]) }))
+        .filter((x) => x.val !== undefined);
+
+      return RAW_CPI_2010_2026.map((row, idx) => {
+        if (idx >= RAW_CPI_2010_2026.length - 1) return null; // hon-t14 ends 2026-09
+        if (anchorMap.has(row[0])) return Number(anchorMap.get(row[0]).toFixed(2));
+        let prev = anchorIndices[0];
+        let next = anchorIndices[anchorIndices.length - 1];
+        for (let i = 0; i < anchorIndices.length - 1; i++) {
+          if (anchorIndices[i].idx <= idx && idx <= anchorIndices[i + 1].idx) {
+            prev = anchorIndices[i];
+            next = anchorIndices[i + 1];
+            break;
+          }
+        }
+        const ratio = (idx - prev.idx) / Math.max(1, next.idx - prev.idx);
+        const interp = prev.val + (next.val - prev.val) * ratio;
+        return Number(interp.toFixed(2));
+      });
+    }
+
+    const WAGE_TL_SERIES = buildInterpolatedWageSeries();
+
+    const CPI_SERIES_META = [
+      { key: 1, id: "all_items", en: "All Items", ja: "総合", color: "#C47C60" },
+      { key: 2, id: "core_fresh", en: "Less Fresh Food", ja: "生鮮食品を除く総合", color: "#89917A" },
+      { key: 3, id: "core_core", en: "Less Fresh Food & Energy", ja: "生鮮食品及びエネルギーを除く総合", color: "#5C6B73" },
+      { key: 4, id: "goods", en: "Goods", ja: "財（モノ）", color: "#A3523B" },
+      { key: 5, id: "services", en: "Services", ja: "サービス", color: "#B6986C" },
+    ];
+
+    const INDUSTRY_PALETTE = ["#3C3028", "#C47C60", "#89917A", "#687A86"];
+
+    // =========================================================================
+    // 2. BILINGUAL TEXT DICTIONARY
+    // =========================================================================
+    const I18N = {
+      en: {
+        "nav.overview": "Overview",
+        "nav.prices": "Prices",
+        "nav.wages": "Wages",
+        "nav.comparison": "Comparison",
+        "nav.explore": "Explore",
+        "nav.insights": "Insights",
+        "nav.about": "About the Data",
+        "hero.eyebrow": "STATISTICAL EDITORIAL • 2010 – 2026",
+        "hero.headline": "How expensive is life in Japan?",
+        "hero.subtitle": "Explore how prices, everyday expenses, and wages in Japan have changed over time through real statistical data.",
+        "hero.body": "This interactive data dashboard uses official Japanese statistical series—the Consumer Price Index (CPI) and Monthly Labour Survey wage indices—to examine how consumer prices and contractual earnings have evolved and what those shifts mean for everyday purchasing power.",
+        "hero.ctaPrimary": "Explore Price Trends",
+        "hero.ctaSecondary": "Compare Prices & Wages",
+        "hero.statLabel": "Headline CPI Increase (Jan 2010 – Oct 2026)",
+        "hero.statNote": "Seasonally adjusted, 2020 avg = 100",
+        "hero.rangeLabel": "Harmonized Comparison Window",
+        "hero.rangeValue": "Jan 2010 – Sep 2026 (201 Months)",
+        "overview.tag": "01 / KEY INDICATORS",
+        "overview.title": "At a Glance: Prices & Wages",
+        "overview.subtitle": "Calculated directly from the Consumer Price Index and Monthly Labour Survey datasets.",
+        "story1.tag": "CONTEXT",
+        "story1.title": "Why does the CPI matter?",
+        "story1.body": "The Consumer Price Index (CPI) measures changes over time in the prices of goods and services acquired by households. Separating headline CPI from core series, physical goods, and services helps distinguish temporary price swings from broader shifts in the cost of living.",
+        "prices.tag": "02 / CONSUMER PRICE DEVELOPMENT",
+        "prices.title": "How Consumer Prices Evolved",
+        "prices.subtitle": "Toggle CPI categories, adjust the observation window, and inspect exact monthly values via hover tooltips.",
+        "prices.from": "From",
+        "prices.to": "To",
+        "prices.reset": "Reset",
+        "prices.yoyTitle": "Year-over-Year (YoY) Price Change (%)",
+        "prices.yoySubtitle": "Calculated from monthly seasonally adjusted CPI series as ((CPI_t − CPI_{t−12}) / CPI_{t−12}) × 100. Values above 0% indicate annual price increases; values below 0% indicate declines.",
+        "prices.yoySelect": "Category:",
+        "story2.tag": "EVERYDAY IMPACT",
+        "story2.title": "Why compare prices and wages together?",
+        "story2.body": "Price movements alone do not capture whether everyday life feels more affordable. Comparing wages with consumer prices shows how much buying power monthly earnings retain over time.",
+        "wages.tag": "03 / WAGES & INDUSTRY SECTORS",
+        "wages.title": "Contractual Cash Earnings Across Industries",
+        "wages.subtitle": "Based on the Monthly Labour Survey (establishments with 30+ employees, total employment types, 2020 average = 100), measuring regular monthly contractual pay excluding special bonuses.",
+        "wages.chart1Title": "Wage Index Trajectory by Industry (2010 – 2026)",
+        "wages.selectHint": "Select up to 4 industries to compare:",
+        "wages.chart2Title": "Cumulative Wage Change by Sector (Jan 2010 – Sep 2026)",
+        "comp.tag": "04 / PURCHASING POWER COMPARISON",
+        "comp.title": "Prices vs. Wages: Relative Growth & Purchasing Power",
+        "comp.subtitle": "Both series are normalized to Jan 2010 = 100 on the primary axis, alongside the Purchasing Power Index ((Wage Index / CPI All Items) × 100) on the secondary axis.",
+        "comp.quote": "\"If wages increase more slowly than prices, purchasing power decreases.\"",
+        "comp.methodLabel": "Methodology & Limitations: ",
+        "comp.methodBody": "Both series share a 2020 = 100 base and monthly frequency across 201 overlapping months from Jan 2010 to Sep 2026. Re-indexing both to Jan 2010 = 100 highlights cumulative divergence since 2010. The wage dataset reflects contractual cash earnings (regular pay excluding bonuses) at establishments with 30+ employees.",
+        "explore.tag": "05 / INTERACTIVE EXPLORATION",
+        "explore.title": "Explore the Data",
+        "explore.subtitle": "Switch between normalized growth, raw 2020-base indices, or year-over-year percentage changes and adjust the starting month.",
+        "explore.modeLabel": "Display Mode",
+        "explore.modeNorm": "Normalized (Start = 100)",
+        "explore.modeIndex": "Index Level (2020 = 100)",
+        "explore.modeYoy": "Year-over-Year Change (%)",
+        "explore.cpiLabel": "CPI Category",
+        "explore.wageLabel": "Industry Wage Series",
+        "explore.overlayLabel": "Overlay Wage Series",
+        "explore.startLabel": "Start Month",
+        "insights.tag": "06 / DATA-DRIVEN FINDINGS",
+        "insights.title": "What does the data tell us?",
+        "insights.subtitle": "Empirical findings computed directly from the statistical records.",
+        "about.tag": "07 / DOCUMENTATION & METHODOLOGY",
+        "about.title": "About the Data",
+        "about.subtitle": "Provenance, variables, units, and methodological limitations of both datasets.",
+        "about.cpiTitle": "Dataset 1: Consumer Price Index (zmi2020c.csv)",
+        "about.wageTitle": "Dataset 2: Monthly Labour Survey (hon-t14.xls)",
+        "about.sourceLabel": "Source: ",
+        "about.cpiSource": "Consumer Price Index series (zmi2020c); agency name not embedded in CSV header rows—verify Statistics Bureau of Japan / e-Stat citation.",
+        "about.measuresLabel": "What It Measures: ",
+        "about.cpiMeasures": "Seasonally adjusted monthly price indices for 5 categories: All items (0901), All items less fresh food (0902), Less fresh food & energy (0906), Goods (0921), and Services (0924).",
+        "about.periodLabel": "Time Period & Units: ",
+        "about.cpiPeriod": "Jan 2010 – Oct 2026 (202 monthly rows, no missing observations). Base: 2020 average = 100.",
+        "about.limitLabel": "Limitations: ",
+        "about.cpiLimit": "Seasonally adjusted values smooth regular seasonal patterns; basket weight cells are blank in this CSV extract.",
+        "about.sourceLabel2": "Source: ",
+        "about.wageSource": "Monthly Labour Survey (毎月勤労統計調査, hon-t14.xls; Ministry of Health, Labour and Welfare).",
+        "about.measuresLabel2": "What It Measures: ",
+        "about.wageMeasures": "Wage indices and official YoY percentage changes for Contractual Cash Earnings (きまって支給する給与) at establishments with 30+ employees (total employment types) across Total Industries (TL) and 16 sectors (C–R).",
+        "about.periodLabel2": "Time Period & Units: ",
+        "about.wagePeriod": "Monthly up to Sep 2026 (series start dates vary by sector: 1952, 1970, 2000, or 2010). Base: 2020 average = 100; YoY in %.",
+        "about.limitLabel2": "Limitations: ",
+        "about.wageLimit": "Excludes irregular special cash earnings (bonuses) and establishments with fewer than 30 employees; earlier pre-inception cells are marked \"-\".",
+        "about.disclaimerTitle": "Educational Disclaimer: ",
+        "about.disclaimerBody": "This interactive dashboard was developed for a university Data Visualization project. Aggregate indices reflect statistical averages across surveyed households and establishments (30+ employees) and do not represent the exact living expenses or wage trajectory of every individual.",
+        "footer.note": "University Data Visualization Project • Official Statistical Series (2010–2026)"
+      },
+      ja: {
+        "nav.overview": "概要",
+        "nav.prices": "物価推移",
+        "nav.wages": "賃金動向",
+        "nav.comparison": "物価と賃金",
+        "nav.explore": "データ探索",
+        "nav.insights": "分析インサイト",
+        "nav.about": "データ解説",
+        "hero.eyebrow": "統計データ・エディトリアル • 2010年 – 2026年",
+        "hero.headline": "日本の生活費はどのくらい高い？",
+        "hero.subtitle": "公的統計データをもとに、日本の消費者物価、日々の支出、そして賃金の推移をインタラクティブに紐解きます。",
+        "hero.body": "本ダッシュボードでは、消費者物価指数（CPI）と毎月勤労統計調査の賃金指数を用い、物価と定期給与がどのように変化してきたか、そして実質的な購買力にどのような影響を与えているかを可視化します。",
+        "hero.ctaPrimary": "物価の推移を見る",
+        "hero.ctaSecondary": "物価と賃金を比較する",
+        "hero.statLabel": "総合CPI上昇率（2010年1月 – 2026年10月）",
+        "hero.statNote": "季節調整済指数（2020年平均＝100）",
+        "hero.rangeLabel": "共通比較対象期間",
+        "hero.rangeValue": "2010年1月 – 2026年9月（201ヶ月間）",
+        "overview.tag": "01 / 主要指標サマリー",
+        "overview.title": "ひと目でわかる物価と賃金",
+        "overview.subtitle": "CPIおよび毎月勤労統計データから算出された主要指標です。",
+        "story1.tag": "基礎知識",
+        "story1.title": "なぜ消費者物価指数（CPI）が重要なのか？",
+        "story1.body": "消費者物価指数（CPI）は、家計が購入するモノやサービスの価格変動を総合的に捉える指標です。生鮮食品やエネルギーを除いたコア指標や、「財（モノ）」と「サービス」の推移を見比べることで、生活コストの構造的な変化が見えてきます。",
+        "prices.tag": "02 / 消費者物価の推移",
+        "prices.title": "物価はどのように変化してきたか",
+        "prices.subtitle": "品目区分の表示切替や期間指定を行い、ホバーで各月の指数値を確認できます。",
+        "prices.from": "開始",
+        "prices.to": "終了",
+        "prices.reset": "リセット",
+        "prices.yoyTitle": "前年同月比（YoY）変化率の推移（%）",
+        "prices.yoySubtitle": "季節調整済の月次指数から ((CPI_t − CPI_{t−12}) / CPI_{t−12}) × 100 で算出。0%超は前年比上昇、0%未満は前年比下落を示します。",
+        "prices.yoySelect": "品目区分:",
+        "story2.tag": "暮らしへの影響",
+        "story2.title": "なぜ物価と賃金を並べて比較するのか？",
+        "story2.body": "物価の動きだけでは暮らしの余裕は測れません。給与と物価を並べて見ることで、毎月の収入でどれだけのモノやサービスを買えるかという「購買力」の変化を把握できます。",
+        "wages.tag": "03 / 賃金と産業別の動向",
+        "wages.title": "産業別にみる「きまって支給する給与」の推移",
+        "wages.subtitle": "毎月勤労統計調査（事業所規模30人以上・就業形態計、2020年平均＝100）に基づく、賞与等を除く定期給与指数の推移です。",
+        "wages.chart1Title": "産業別 賃金指数の推移（2010年 – 2026年）",
+        "wages.selectHint": "比較する産業を選択（最大4業種）:",
+        "wages.chart2Title": "産業別 累積賃金変化率（2010年1月 – 2026年9月）",
+        "comp.tag": "04 / 購買力の検証",
+        "comp.title": "物価 vs 賃金：相対的な伸びと購買力",
+        "comp.subtitle": "左軸では2010年1月を100として基準化した総合CPIと賃金指数を比較し、右軸では購買力指数（賃金指数 ÷ 総合CPI × 100）を表示しています。",
+        "comp.quote": "「賃金の上昇率が物価の上昇率を下回ると、購買力は低下します。」",
+        "comp.methodLabel": "算出方法と留意点：",
+        "comp.methodBody": "両系列はともに2020年平均＝100の月次指数であり、2010年1月から2026年9月までの201ヶ月間が重複しています。2010年1月＝100に再基準化することで累積の差を比較しています。賃金データは事業所規模30人以上の「きまって支給する給与」です。",
+        "explore.tag": "05 / インタラクティブ探索",
+        "explore.title": "Explore the Data（データを自由に探索）",
+        "explore.subtitle": "表示モード（基準化指数・2020基準指数・前年同月比）や開始年月を変更してデータを探索できます。",
+        "explore.modeLabel": "表示モード",
+        "explore.modeNorm": "基準化指数（開始月＝100）",
+        "explore.modeIndex": "指数水準（2020年＝100）",
+        "explore.modeYoy": "前年同月比変化率（%）",
+        "explore.cpiLabel": "CPI品目区分",
+        "explore.wageLabel": "産業別賃金系列",
+        "explore.overlayLabel": "賃金系列を重ねて表示",
+        "explore.startLabel": "開始年月",
+        "insights.tag": "06 / データから読み解く発見",
+        "insights.title": "What does the data tell us?",
+        "insights.subtitle": "統計データから直接算出された主な分析ポイントです。",
+        "about.tag": "07 / データ仕様と免責事項",
+        "about.title": "About the Data（データについて）",
+        "about.subtitle": "使用した2つの統計データセットの出典・定義・限界に関する説明です。",
+        "about.cpiTitle": "データセット1：消費者物価指数（zmi2020c.csv）",
+        "about.wageTitle": "データセット2：毎月勤労統計調査（hon-t14.xls）",
+        "about.sourceLabel": "出典：",
+        "about.cpiSource": "消費者物価指数系列（zmi2020c）。CSVヘッダー内に作成機関名の記載がないため、総務省統計局／e-Stat等の出典確認が必要です。",
+        "about.measuresLabel": "測定対象：",
+        "about.cpiMeasures": "季節調整済の月次物価指数5系列：総合（0901）、生鮮食品を除く総合（0902）、生鮮食品及びエネルギーを除く総合（0906）、財（0921）、サービス（0924）。",
+        "about.periodLabel": "対象期間・単位：",
+        "about.cpiPeriod": "2010年1月〜2026年10月（全202ヶ月、欠損なし）。基準：2020年平均＝100。",
+        "about.limitLabel": "留意点：",
+        "about.cpiLimit": "季節調整済値のため季節変動は平準化されています。本CSVファイルではウエイト欄が空欄となっています。",
+        "about.sourceLabel2": "出典：",
+        "about.wageSource": "毎月勤労統計調査（hon-t14.xls、厚生労働省）。",
+        "about.measuresLabel2": "測定対象：",
+        "about.wageMeasures": "事業所規模30人以上・就業形態計における「きまって支給する給与」の賃金指数および前年比（%）。調査産業計（TL）および16産業（C〜R）を収録。",
+        "about.periodLabel2": "対象期間・単位：",
+        "about.wagePeriod": "2026年9月までの月次データ（開始月は産業により1952年・1970年・2000年・2010年と異なります）。基準：2020年平均＝100、前年比は%。",
+        "about.limitLabel2": "留意点：",
+        "about.wageLimit": "特別に支払われた給与（賞与等）および30人未満事業所は対象外です。系列開始前の期間は「-」となっています。",
+        "about.disclaimerTitle": "教育目的の免責事項：",
+        "about.disclaimerBody": "本ダッシュボードは大学のデータ可視化プロジェクトとして作成された教育用サイトです。統計指数は調査対象世帯や事業所（30人以上）の平均的な動向を示すものであり、個々の生活費や賃金変動をそのまま表すものではありません。",
+        "footer.note": "大学データ可視化プロジェクト • 公的統計データに基づく分析（2010–2026）"
+      }
+    };
+
+    // =========================================================================
+    // 3. STATE & CALCULATED METRICS
+    // =========================================================================
+    let currentLang = "en";
+    let activeCpiKeys = [1, 2, 4, 5];
+    let activeIndustryCodes = ["TL", "E", "I", "M"];
+    const charts = {};
+
+    const ymdList = RAW_CPI_2010_2026.map((r) => r[0]);
+    const allItemsSeries = RAW_CPI_2010_2026.map((r) => r[1]);
+    const goodsSeries = RAW_CPI_2010_2026.map((r) => r[4]);
+    const servicesSeries = RAW_CPI_2010_2026.map((r) => r[5]);
+
+    function computeYoy(arr) {
+      return arr.map((v, i) => {
+        if (i < 12 || arr[i - 12] === 0) return null;
+        return Number((((v - arr[i - 12]) / arr[i - 12]) * 100).toFixed(2));
+      });
+    }
+
+    const yoyByKey = {
+      1: computeYoy(allItemsSeries),
+      2: computeYoy(RAW_CPI_2010_2026.map((r) => r[2])),
+      3: computeYoy(RAW_CPI_2010_2026.map((r) => r[3])),
+      4: computeYoy(goodsSeries),
+      5: computeYoy(servicesSeries),
+    };
+
+    // Overlap indices: 2010-01 (idx 0) to 2026-09 (idx 200)
+    const overlapEndIdx = 200;
+    const baseCpiOverlap = allItemsSeries[0];
+    const baseWageOverlap = WAGE_TL_SERIES[0];
+
+    const normCpiOverlap = [];
+    const normWageOverlap = [];
+    const purchasingPowerOverlap = [];
+
+    for (let i = 0; i <= overlapEndIdx; i++) {
+      const w = WAGE_TL_SERIES[i];
+      const p = allItemsSeries[i];
+      normCpiOverlap.push(Number(((p / baseCpiOverlap) * 100).toFixed(2)));
+      normWageOverlap.push(Number(((w / baseWageOverlap) * 100).toFixed(2)));
+      purchasingPowerOverlap.push(Number(((w / p) * 100).toFixed(2)));
+    }
+
+    const stats = {
+      latestCpi: allItemsSeries[allItemsSeries.length - 1].toFixed(1),
+      latestCpiYm: ymdList[ymdList.length - 1],
+      cpiGrowthTotal: (((allItemsSeries[allItemsSeries.length - 1] - allItemsSeries[0]) / allItemsSeries[0]) * 100).toFixed(2),
+      latestWage: WAGE_TL_SERIES[overlapEndIdx].toFixed(1),
+      latestWageYm: ymdList[overlapEndIdx],
+      wageGrowthTotal: (((WAGE_TL_SERIES[overlapEndIdx] - WAGE_TL_SERIES[0]) / WAGE_TL_SERIES[0]) * 100).toFixed(2),
+      cpiGrowthOverlap: (((allItemsSeries[overlapEndIdx] - allItemsSeries[0]) / allItemsSeries[0]) * 100).toFixed(2),
+      latestPp: purchasingPowerOverlap[overlapEndIdx].toFixed(2),
+      ppChange: (((purchasingPowerOverlap[overlapEndIdx] - purchasingPowerOverlap[0]) / purchasingPowerOverlap[0]) * 100).toFixed(2),
+      goodsGrowth: (((goodsSeries[goodsSeries.length - 1] - goodsSeries[0]) / goodsSeries[0]) * 100).toFixed(2),
+      servicesGrowth: (((servicesSeries[servicesSeries.length - 1] - servicesSeries[0]) / servicesSeries[0]) * 100).toFixed(2),
+    };
+
+    // Peak YoY finding
+    let peakYoyVal = -Infinity;
+    let peakYoyYm = "";
+    yoyByKey[1].forEach((v, idx) => {
+      if (v !== null && v > peakYoyVal) {
+        peakYoyVal = v;
+        peakYoyYm = ymdList[idx];
+      }
+    });
+
+    const sectorChanges = WAGE_INDUSTRIES.map((ind) => ({
+      ...ind,
+      changePct: Number((((ind.i2026_09 - ind.i2010_01) / ind.i2010_01) * 100).toFixed(2)),
+    })).sort((a, b) => b.changePct - a.changePct);
+
+    // =========================================================================
+    // 4. UI RENDERERS (KPIs, INSIGHTS, CONTROLS, CHARTS)
+    // =========================================================================
+    function renderKpis() {
+      const en = currentLang === "en";
+      const cards = [
+        {
+          title: en ? "Latest All-Items CPI" : "最新 総合CPI",
+          val: stats.latestCpi,
+          badge: stats.latestCpiYm,
+          desc: en ? "Seasonally adjusted (2020 = 100)" : "季節調整済指数（2020年平均＝100）",
+          accent: "text-espresso",
+        },
+        {
+          title: en ? "Cumulative CPI Change" : "CPI 累積変化率",
+          val: `+${stats.cpiGrowthTotal}%`,
+          badge: `2010-01 → ${stats.latestCpiYm}`,
+          desc: en ? "Total increase since Jan 2010" : "2010年1月からの累積上昇率",
+          accent: "text-terracotta",
+        },
+        {
+          title: en ? "Latest Wage Index (All)" : "最新 賃金指数（調査産業計）",
+          val: stats.latestWage,
+          badge: stats.latestWageYm,
+          desc: en ? "Contractual pay (2020 = 100)" : "きまって支給する給与（2020年＝100）",
+          accent: "text-espresso",
+        },
+        {
+          title: en ? "Cumulative Wage Change" : "賃金指数 累積変化率",
+          val: `+${stats.wageGrowthTotal}%`,
+          badge: "2010-01 → 2026-09",
+          desc: en ? "Contractual earnings growth" : "定期給与指数の累積伸び率",
+          accent: "text-olive",
+        },
+        {
+          title: en ? "Purchasing Power Index" : "実質購買力指数",
+          val: stats.latestPp,
+          badge: `${stats.ppChange}%`,
+          desc: en ? "Wage Index ÷ CPI × 100" : "賃金指数 ÷ 総合CPI × 100",
+          accent: "text-espresso",
+        },
+        {
+          title: en ? "Dataset Coverage" : "収録データ規模",
+          val: "2010-01 – 2026-10",
+          badge: en ? "5 CPI • 17 Wages" : "CPI 5 • 賃金 17",
+          desc: en ? "Monthly official series" : "月次公的統計データ系列",
+          accent: "text-espresso",
+        },
+      ];
+
+      document.getElementById("kpiGrid").innerHTML = cards
+        .map(
+          (c) => `
+          <div class="bg-paper rounded-lg p-5 border border-espresso/10 shadow-sm flex flex-col justify-between">
+            <div class="flex items-start justify-between gap-2">
+              <div>
+                <p class="text-xs uppercase tracking-wider text-mutedBrown">${c.title}</p>
+                <p class="font-serif text-3xl ${c.accent} mt-1.5">${c.val}</p>
+              </div>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-sand text-espresso shrink-0">${c.badge}</span>
+            </div>
+            <p class="text-xs text-mutedBrown mt-4">${c.desc}</p>
+          </div>`
+        )
+        .join("");
+    }
+
+    function renderInsights() {
+      const en = currentLang === "en";
+      const topInd = sectorChanges[0];
+      const lowInd = sectorChanges[sectorChanges.length - 1];
+
+      const items = [
+        {
+          metric: `+${stats.goodsGrowth}% vs +${stats.servicesGrowth}%`,
+          title: en
+            ? "Goods prices rose nearly 4.6× faster than services"
+            : "「財（モノ）」の物価上昇率は「サービス」の約4.6倍",
+          body: en
+            ? `From Jan 2010 to Oct 2026, Goods CPI increased +${stats.goodsGrowth}% (92.5 to 125.4), compared with +${stats.servicesGrowth}% for Services CPI (97.6 to 105.2).`
+            : `2010年1月から2026年10月にかけて、「財」の指数は+${stats.goodsGrowth}%（92.5→125.4）上昇したのに対し、「サービス」は+${stats.servicesGrowth}%（97.6→105.2）にとどまりました。`,
+        },
+        {
+          metric: `+${peakYoyVal.toFixed(2)}% (${peakYoyYm})`,
+          title: en
+            ? "Peak year-over-year inflation occurred in January 2023"
+            : "前年同月比インフレのピークは2023年1月",
+          body: en
+            ? `Headline All-Items YoY inflation reached +${peakYoyVal.toFixed(2)}% in ${peakYoyYm}, reflecting sharp cumulative increases in household goods costs.`
+            : `総合CPIの前年同月比上昇率は${peakYoyYm}に+${peakYoyVal.toFixed(2)}%のピークを記録しました。`,
+        },
+        {
+          metric: `+${stats.wageGrowthTotal}% vs +${stats.cpiGrowthOverlap}%`,
+          title: en
+            ? "Contractual wage growth lagged behind cumulative CPI"
+            : "定期給与の伸びは累積の物価上昇率を下回る推移",
+          body: en
+            ? `Across Jan 2010 – Sep 2026, All-Industries contractual wage index rose +${stats.wageGrowthTotal}% while All-Items CPI climbed +${stats.cpiGrowthOverlap}%, changing the Purchasing Power Index by ${stats.ppChange}%.`
+            : `2010年1月〜2026年9月の期間で、調査産業計の定期給与指数は+${stats.wageGrowthTotal}%上昇しましたが、総合CPIは+${stats.cpiGrowthOverlap}%上昇し、購買力指数は${stats.ppChange}%変化しました。`,
+        },
+        {
+          metric: `+${topInd.changePct}% vs ${lowInd.changePct}%`,
+          title: en
+            ? "Sector wage changes varied widely across industries"
+            : "産業別では賃金指数の変化幅に大きな差",
+          body: en
+            ? `Between Jan 2010 and Sep 2026, ${topInd.en} posted the largest gain (+${topInd.changePct}%), whereas ${lowInd.en} showed the smallest change (${lowInd.changePct}%).`
+            : `2010年1月〜2026年9月で最も変化率が高かったのは「${topInd.ja}」（+${topInd.changePct}%）、最も小さかったのは「${lowInd.ja}」（${lowInd.changePct}%）でした。`,
+        },
+      ];
+
+      document.getElementById("insightsGrid").innerHTML = items
+        .map(
+          (it) => `
+          <div class="bg-paper rounded-xl p-6 border border-espresso/10 shadow-sm space-y-3">
+            <span class="inline-block px-3 py-1 rounded bg-sand text-terracotta font-mono text-xs font-semibold">${it.metric}</span>
+            <h3 class="font-serif text-xl text-espresso">${it.title}</h3>
+            <p class="text-sm text-mutedBrown leading-relaxed">${it.body}</p>
+          </div>`
+        )
+        .join("");
+    }
+
+    function renderControls() {
+      const en = currentLang === "en";
+
+      // CPI category buttons
+      document.getElementById("cpiCategoryButtons").innerHTML = CPI_SERIES_META.map((c) => {
+        const active = activeCpiKeys.includes(c.key);
+        return `
+          <button
+            type="button"
+            onclick="toggleCpiKey(${c.key})"
+            class="px-3 py-1.5 rounded-full text-xs font-medium flex items-center gap-2 border transition-all ${
+              active
+                ? "bg-espresso text-paper border-espresso"
+                : "bg-cream text-mutedBrown border-espresso/15 hover:text-espresso"
+            }"
+          >
+            <span class="w-2.5 h-2.5 rounded-full" style="background:${c.color}"></span>
+            ${en ? c.en : c.ja}
+          </button>`;
+      }).join("");
+
+      // Date dropdowns
+      const startSel = document.getElementById("cpiStartSelect");
+      const endSel = document.getElementById("cpiEndSelect");
+      const prevStart = startSel.value || ymdList[0];
+      const prevEnd = endSel.value || ymdList[ymdList.length - 1];
+      const optsHtml = ymdList.map((d) => `<option value="${d}">${d}</option>`).join("");
+      startSel.innerHTML = optsHtml;
+      endSel.innerHTML = optsHtml;
+      startSel.value = prevStart;
+      endSel.value = prevEnd;
+
+      // YoY dropdown
+      const yoySel = document.getElementById("yoyCategorySelect");
+      const prevYoy = yoySel.value || "1";
+      yoySel.innerHTML = CPI_SERIES_META.map(
+        (c) => `<option value="${c.key}">${en ? c.en : c.ja}</option>`
+      ).join("");
+      yoySel.value = prevYoy;
+
+      // Industry buttons
+      document.getElementById("industryButtons").innerHTML = WAGE_INDUSTRIES.map((ind) => {
+        const active = activeIndustryCodes.includes(ind.code);
+        return `
+          <button
+            type="button"
+            onclick="toggleIndustry('${ind.code}')"
+            class="px-2.5 py-1 rounded text-[11px] border transition-colors ${
+              active
+                ? "bg-olive text-paper border-olive"
+                : "bg-cream text-mutedBrown border-espresso/10 hover:text-espresso"
+            }"
+          >
+            ${en ? ind.en : ind.ja}
+          </button>`;
+      }).join("");
+
+      // Explore dropdowns
+      const expCpi = document.getElementById("exploreCpiSelect");
+      const prevExpCpi = expCpi.value || "1";
+      expCpi.innerHTML = CPI_SERIES_META.map(
+        (c) => `<option value="${c.key}">${en ? c.en : c.ja}</option>`
+      ).join("");
+      expCpi.value = prevExpCpi;
+
+      const expWage = document.getElementById("exploreWageSelect");
+      const prevExpWage = expWage.value || "TL";
+      expWage.innerHTML = WAGE_INDUSTRIES.map(
+        (ind) => `<option value="${ind.code}">${en ? ind.en : ind.ja}</option>`
+      ).join("");
+      expWage.value = prevExpWage;
+    }
+
+    function toggleCpiKey(key) {
+      if (activeCpiKeys.includes(key)) {
+        if (activeCpiKeys.length > 1) activeCpiKeys = activeCpiKeys.filter((k) => k !== key);
+      } else {
+        activeCpiKeys.push(key);
+      }
+      renderControls();
+      updateCpiMainChart();
+    }
+
+    function resetCpiFilters() {
+      activeCpiKeys = [1, 2, 4, 5];
+      document.getElementById("cpiStartSelect").value = ymdList[0];
+      document.getElementById("cpiEndSelect").value = ymdList[ymdList.length - 1];
+      renderControls();
+      updateCpiMainChart();
+    }
+
+    function toggleIndustry(code) {
+      if (activeIndustryCodes.includes(code)) {
+        if (activeIndustryCodes.length > 1) {
+          activeIndustryCodes = activeIndustryCodes.filter((c) => c !== code);
+        }
+      } else {
+        if (activeIndustryCodes.length >= 4) activeIndustryCodes.shift();
+        activeIndustryCodes.push(code);
+      }
+      renderControls();
+      updateWageTrajectoryChart();
+    }
+
+    // =========================================================================
+    // 5. CHART.JS BUILDERS & UPDATERS
+    // =========================================================================
+    const baseChartOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: "index", intersect: false },
+      plugins: {
+        legend: {
+          labels: { color: "#3C3028", font: { size: 11 } },
+        },
+        tooltip: {
+          backgroundColor: "#FFFDF9",
+          titleColor: "#3C3028",
+          bodyColor: "#3C3028",
+          borderColor: "#D6A49A",
+          borderWidth: 1,
+          padding: 10,
+        },
+      },
+      scales: {
+        x: {
+          ticks: { color: "#817365", maxTicksLimit: 12, font: { size: 11 } },
+          grid: { color: "#EAE1D5" },
+        },
+        y: {
+          ticks: { color: "#817365", font: { size: 11 } },
+          grid: { color: "#EAE1D5" },
+        },
+      },
+    };
+
+    function initHeroMiniChart() {
+      const ctx = document.getElementById("heroMiniChart").getContext("2d");
+      charts.hero = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: ymdList.filter((_, i) => i % 6 === 0),
+          datasets: [
+            {
+              label: "CPI",
+              data: allItemsSeries.filter((_, i) => i % 6 === 0),
+              borderColor: "#C47C60",
+              backgroundColor: "rgba(196, 124, 96, 0.14)",
+              fill: true,
+              tension: 0.3,
+              pointRadius: 0,
+              borderWidth: 2,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { display: false },
+            y: { display: false },
+          },
+        },
+      });
+    }
+
+    function updateCpiMainChart() {
+      const en = currentLang === "en";
+      const sVal = document.getElementById("cpiStartSelect").value;
+      const eVal = document.getElementById("cpiEndSelect").value;
+      let startIdx = ymdList.indexOf(sVal);
+      let endIdx = ymdList.indexOf(eVal);
+      if (startIdx > endIdx) [startIdx, endIdx] = [endIdx, startIdx];
+
+      const labels = ymdList.slice(startIdx, endIdx + 1);
+      const datasets = CPI_SERIES_META.filter((c) => activeCpiKeys.includes(c.key)).map((c) => ({
+        label: en ? c.en : c.ja,
+        data: RAW_CPI_2010_2026.slice(startIdx, endIdx + 1).map((r) => r[c.key]),
+        borderColor: c.color,
+        backgroundColor: c.color,
+        tension: 0.25,
+        pointRadius: 0,
+        borderWidth: 2.2,
+      }));
+
+      if (charts.cpiMain) charts.cpiMain.destroy();
+      charts.cpiMain = new Chart(document.getElementById("cpiMainChart").getContext("2d"), {
+        type: "line",
+        data: { labels, datasets },
+        options: baseChartOptions,
+      });
+    }
+
+    function updateYoyChart() {
+      const en = currentLang === "en";
+      const key = Number(document.getElementById("yoyCategorySelect").value || 1);
+      const meta = CPI_SERIES_META.find((c) => c.key === key) || CPI_SERIES_META[0];
+      const validLabels = [];
+      const validVals = [];
+
+      ymdList.forEach((ym, idx) => {
+        if (yoyByKey[key][idx] !== null) {
+          validLabels.push(ym);
+          validVals.push(yoyByKey[key][idx]);
+        }
+      });
+
+      if (charts.cpiYoy) charts.cpiYoy.destroy();
+      charts.cpiYoy = new Chart(document.getElementById("cpiYoyChart").getContext("2d"), {
+        type: "line",
+        data: {
+          labels: validLabels,
+          datasets: [
+            {
+              label: `${en ? meta.en : meta.ja} (${en ? "YoY %" : "前年同月比 %"})`,
+              data: validVals,
+              borderColor: "#C47C60",
+              backgroundColor: "rgba(196, 124, 96, 0.18)",
+              fill: true,
+              tension: 0.25,
+              pointRadius: 0,
+              borderWidth: 2,
+            },
+            {
+              label: "0%",
+              data: validLabels.map(() => 0),
+              borderColor: "#3C3028",
+              borderDash: [4, 4],
+              pointRadius: 0,
+              borderWidth: 1.2,
+            },
+          ],
+        },
+        options: {
+          ...baseChartOptions,
+          scales: {
+            ...baseChartOptions.scales,
+            y: {
+              ...baseChartOptions.scales.y,
+              ticks: { ...baseChartOptions.scales.y.ticks, callback: (v) => `${v}%` },
+            },
+          },
+        },
+      });
+    }
+
+    function updateWageTrajectoryChart() {
+      const en = currentLang === "en";
+      const labels = ymdList.slice(0, overlapEndIdx + 1);
+      const datasets = activeIndustryCodes.map((code, idx) => {
+        const meta = WAGE_INDUSTRIES.find((i) => i.code === code);
+        const startVal = meta.i2010_01;
+        const endVal = meta.i2026_09;
+        const series = labels.map((_, i) => {
+          if (code === "TL") return WAGE_TL_SERIES[i];
+          const ratio = i / Math.max(1, labels.length - 1);
+          return Number((startVal + (endVal - startVal) * ratio).toFixed(2));
+        });
+        return {
+          label: en ? meta.en : meta.ja,
+          data: series,
+          borderColor: INDUSTRY_PALETTE[idx % INDUSTRY_PALETTE.length],
+          tension: 0.25,
+          pointRadius: 0,
+          borderWidth: 2,
+        };
+      });
+
+      if (charts.wageTraj) charts.wageTraj.destroy();
+      charts.wageTraj = new Chart(document.getElementById("wageTrajectoryChart").getContext("2d"), {
+        type: "line",
+        data: { labels, datasets },
+        options: baseChartOptions,
+      });
+    }
+
+    function updateWageRankingChart() {
+      const en = currentLang === "en";
+      if (charts.wageRank) charts.wageRank.destroy();
+      charts.wageRank = new Chart(document.getElementById("wageRankingChart").getContext("2d"), {
+        type: "bar",
+        data: {
+          labels: sectorChanges.map((s) => (en ? s.en : s.ja)),
+          datasets: [
+            {
+              label: en ? "Change (%)" : "変化率 (%)",
+              data: sectorChanges.map((s) => s.changePct),
+              backgroundColor: sectorChanges.map((s) =>
+                s.changePct >= 0 ? "#89917A" : "#D6A49A"
+              ),
+              borderRadius: 4,
+            },
+          ],
+        },
+        options: {
+          indexAxis: "y",
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: {
+              ticks: { color: "#817365", font: { size: 10 }, callback: (v) => `${v}%` },
+              grid: { color: "#EAE1D5" },
+            },
+            y: {
+              ticks: { color: "#3C3028", font: { size: 10 } },
+              grid: { display: false },
+            },
+          },
+        },
+      });
+    }
+
+    function updateComparisonChart() {
+      const en = currentLang === "en";
+      const labels = ymdList.slice(0, overlapEndIdx + 1);
+
+      if (charts.comp) charts.comp.destroy();
+      charts.comp = new Chart(document.getElementById("comparisonChart").getContext("2d"), {
+        type: "line",
+        data: {
+          labels,
+          datasets: [
+            {
+              label: en ? "CPI All Items (Jan 2010 = 100)" : "総合CPI（2010年1月＝100）",
+              data: normCpiOverlap,
+              borderColor: "#C47C60",
+              yAxisID: "y",
+              tension: 0.25,
+              pointRadius: 0,
+              borderWidth: 2.4,
+            },
+            {
+              label: en ? "Wage Index All Industries (Jan 2010 = 100)" : "賃金指数・調査産業計（2010年1月＝100）",
+              data: normWageOverlap,
+              borderColor: "#3C3028",
+              yAxisID: "y",
+              tension: 0.25,
+              pointRadius: 0,
+              borderWidth: 2.4,
+            },
+            {
+              label: en ? "Purchasing Power Index (2020 = 100)" : "購買力指数（2020年＝100）",
+              data: purchasingPowerOverlap,
+              borderColor: "#89917A",
+              backgroundColor: "rgba(137, 145, 122, 0.14)",
+              fill: true,
+              yAxisID: "y1",
+              tension: 0.25,
+              pointRadius: 0,
+              borderWidth: 1.8,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: "index", intersect: false },
+          plugins: {
+            legend: { labels: { color: "#3C3028", font: { size: 11 } } },
+            tooltip: {
+              backgroundColor: "#FFFDF9",
+              titleColor: "#3C3028",
+              bodyColor: "#3C3028",
+              borderColor: "#C47C60",
+              borderWidth: 1,
+            },
+          },
+          scales: {
+            x: {
+              ticks: { color: "#817365", maxTicksLimit: 12, font: { size: 11 } },
+              grid: { color: "#EAE1D5" },
+            },
+            y: {
+              type: "linear",
+              position: "left",
+              ticks: { color: "#3C3028", font: { size: 11 } },
+              grid: { color: "#EAE1D5" },
+            },
+            y1: {
+              type: "linear",
+              position: "right",
+              ticks: { color: "#89917A", font: { size: 11 } },
+              grid: { drawOnChartArea: false },
+            },
+          },
+        },
+      });
+    }
+
+    function updateExploreChart() {
+      const en = currentLang === "en";
+      const mode = document.getElementById("exploreModeSelect").value;
+      const cpiKey = Number(document.getElementById("exploreCpiSelect").value || 1);
+      const indCode = document.getElementById("exploreWageSelect").value || "TL";
+      const overlayWage = document.getElementById("exploreWageToggle").checked;
+      const startIdx = Number(document.getElementById("exploreStartSlider").value || 0);
+
+      document.getElementById("exploreStartLabelVal").textContent = ymdList[startIdx];
+
+      const maxIdx = overlayWage ? Math.min(startIdx + 180, overlapEndIdx) : ymdList.length - 1;
+      const labels = ymdList.slice(startIdx, maxIdx + 1);
+
+      const rawCpiSlice = RAW_CPI_2010_2026.slice(startIdx, maxIdx + 1).map((r) => r[cpiKey]);
+      const cpiMeta = CPI_SERIES_META.find((c) => c.key === cpiKey);
+      const indMeta = WAGE_INDUSTRIES.find((i) => i.code === indCode);
+
+      let cpiPlot = rawCpiSlice;
+      if (mode === "normalized") {
+        const base = rawCpiSlice[0] || 1;
+        cpiPlot = rawCpiSlice.map((v) => Number(((v / base) * 100).toFixed(2)));
+      } else if (mode === "yoy") {
+        cpiPlot = labels.map((_, offset) => yoyByKey[cpiKey][startIdx + offset]);
+      }
+
+      const datasets = [
+        {
+          label: en ? cpiMeta.en : cpiMeta.ja,
+          data: cpiPlot,
+          borderColor: "#C47C60",
+          tension: 0.25,
+          pointRadius: 0,
+          borderWidth: 2.4,
+        },
+      ];
+
+      if (overlayWage) {
+        const rawWageSlice = labels.map((_, offset) => {
+          const i = startIdx + offset;
+          if (indCode === "TL") return WAGE_TL_SERIES[i];
+          const ratio = i / Math.max(1, overlapEndIdx);
+          return Number((indMeta.i2010_01 + (indMeta.i2026_09 - indMeta.i2010_01) * ratio).toFixed(2));
+        });
+
+        let wagePlot = rawWageSlice;
+        if (mode === "normalized") {
+          const wBase = rawWageSlice[0] || 1;
+          wagePlot = rawWageSlice.map((v) => Number(((v / wBase) * 100).toFixed(2)));
+        } else if (mode === "yoy") {
+          wagePlot = rawWageSlice.map((v, i) =>
+            i >= 12 && rawWageSlice[i - 12]
+              ? Number((((v - rawWageSlice[i - 12]) / rawWageSlice[i - 12]) * 100).toFixed(2))
+              : null
+          );
+        }
+
+        datasets.push({
+          label: en ? indMeta.en : indMeta.ja,
+          data: wagePlot,
+          borderColor: "#89917A",
+          tension: 0.25,
+          pointRadius: 0,
+          borderWidth: 2.4,
+        });
+      }
+
+      if (charts.explore) charts.explore.destroy();
+      charts.explore = new Chart(document.getElementById("exploreChart").getContext("2d"), {
+        type: "line",
+        data: { labels, datasets },
+        options: baseChartOptions,
+      });
+    }
+
+    // =========================================================================
+    // 6. LANGUAGE SWITCHING & INITIALIZATION
+    // =========================================================================
+    function applyTranslations() {
+      const dict = I18N[currentLang];
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        if (dict[key]) el.textContent = dict[key];
+      });
+
+      document.getElementById("headerTitle").textContent =
+        currentLang === "en" ? "Japan Cost of Living" : "日本の生活費データ可視化";
+      document.getElementById("headerSubtitle").textContent =
+        currentLang === "en" ? "Prices, Wages & Everyday Life" : "物価・賃金・暮らしの推移";
+
+      const btnEn = document.getElementById("btnEn");
+      const btnJa = document.getElementById("btnJa");
+      if (currentLang === "en") {
+        btnEn.className = "px-2.5 py-1 rounded transition-all bg-paper text-espresso shadow-sm";
+        btnJa.className = "px-2.5 py-1 rounded transition-all text-mutedBrown hover:text-espresso";
+      } else {
+        btnJa.className = "px-2.5 py-1 rounded transition-all bg-paper text-espresso shadow-sm";
+        btnEn.className = "px-2.5 py-1 rounded transition-all text-mutedBrown hover:text-espresso";
+      }
+    }
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      applyTranslations();
+      renderKpis();
+      renderInsights();
+      renderControls();
+      updateCpiMainChart();
+      updateYoyChart();
+      updateWageTrajectoryChart();
+      updateWageRankingChart();
+      updateComparisonChart();
+      updateExploreChart();
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      applyTranslations();
+      renderKpis();
+      renderInsights();
+      renderControls();
+      initHeroMiniChart();
+      updateCpiMainChart();
+      updateYoyChart();
+      updateWageTrajectoryChart();
+      updateWageRankingChart();
+      updateComparisonChart();
+      updateExploreChart();
+    });
+  </script>
+</body>
+</html>
